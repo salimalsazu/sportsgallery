@@ -5,7 +5,7 @@ import { BsPhoneVibrate } from 'react-icons/bs';
 
 const TopNav = () => {
     return (
-        <div className=" bg-gray-300 flex items-center font-extralight h-8 text-xs" >
+        <div className=" bg-gray-300 hidden lg:flex items-center font-extralight h-8 text-xs" >
             <div className="flex gap-4 items-center mx-20">
                 <div className='flex gap-1 items-center animate-bounce' >
                     <span className='text-lg'><CiDeliveryTruck ></CiDeliveryTruck></span>
