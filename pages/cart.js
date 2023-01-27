@@ -1,0 +1,76 @@
+import MissProduct from '@/Components/missproduct';
+import Image from 'next/image'
+import watch from '../Assets/Product/watch.jpg'
+import { AiFillDelete } from 'react-icons/ai';
+import { BsFillBagFill } from 'react-icons/bs';
+
+const cart = () => {
+    return (
+        <div className='lg:mx-10 lg:my-20 mx-5'>
+            <h1 className='uppercase font-extrabold text-5xl' >Cart</h1>
+
+            <div className='mt-20 flex lg:flex-row flex-col'>
+                <div className='lg:w-2/3'>
+                    <h1 className='uppercase font-bold flex items-center' >Added to Bag <span><BsFillBagFill className='ml-1' ></BsFillBagFill></span></h1>
+                    <div className='mt-5'>
+                        <table className="table-auto">
+                            <thead>
+                                <tr className="bg-gray-300">
+                                    <th className="lg:px-6 py-4">SL No</th>
+                                    <th className="lg:px-6 py-4">Image</th>
+                                    <th className="lg:px-6 py-4">Title</th>
+                                    <th className="lg:px-6 py-4">Price</th>
+                                    <th className="lg:px-6 py-4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="odd:bg-gray-200 ">
+                                    <td className="border px-6 py-4">1</td>
+                                    <td className="border px-6 py-4">
+                                        <Image
+                                            className='w-10 h-10 lg:w-20 lg:h-20'
+                                            src={watch}
+                                            alt="product"
+
+                                        />
+
+
+                                    </td>
+                                    <td className="border px-6 py-4">Watch</td>
+                                    <td className="border px-6 py-4">$100.00</td>
+                                    <td className="border px-6 py-4">
+
+                                        <AiFillDelete></AiFillDelete>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div className='lg:w-1/3 p-5 lg:mt-0 mt-20 border border-gray-700 flex flex-col justify-center  ' >
+                    <div>
+                        <h1 className='uppercase font-bold' >Cart Totals</h1>
+                        <p className='my-10' ><span className='uppercase font-extrabold mr-20 ' >Subtotal</span><span> $123</span></p>
+                        <p><span className='uppercase font-extrabold mr-20 ' >Shipping :</span></p>
+                    </div>
+
+                    <div className='mt-20' >
+                        <hr className='border-gray-500 border-t-2' />
+                        <p className='my-10' ><span className='uppercase font-extrabold mr-28 ' >Total</span><span> $123</span></p>
+                    </div>
+                    <div className=' mx-auto'>
+                        <button className='uppercase bg-yellow-500  font-bold text-gray-700 hover:border hover:bg-gray-400  px-10 py-3' >Proceed to checkout</button>
+                    </div>
+                </div>
+
+            </div>
+            <div >
+                <MissProduct></MissProduct>
+            </div>
+        </div>
+    );
+};
+
+export default cart;

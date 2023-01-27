@@ -1,5 +1,5 @@
 import Link from 'next/link'
-
+import { BsCart4 } from 'react-icons/bs';
 
 
 const Navbar = () => {
@@ -64,9 +64,9 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div>
-                        <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-end">
-                            <p className='text-2xl font-extrabold uppercase' >Sports <br /> Gallery </p> <hr className='border-yellow-500 border-b-4 w-5' />
-                        </a>
+                        <div rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-end">
+                            <Link href="/" className='text-2xl font-extrabold uppercase' >Sports <br /> Gallery </Link> <hr className='border-yellow-500 border-b-4 w-5' />
+                        </div>
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -76,19 +76,30 @@ const Navbar = () => {
                         <li><a>fitness</a></li>
                         <li><a>Equipment</a></li>
                         <li><a>Indoor</a></li>
-                        <li><a>outdoor </a></li>
+                        <li>
+                            <Link href="/dashboard" >
+                                Dashboard
+                            </Link>
+
+                        </li>
                         <li tabIndex={0}>
                             <a>
                                 shop
                                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
                             </a>
                             <ul className="p-2 bg-black text-white lowercase font-extralight z-50">
-                                <li><a>Track your order</a></li>
+                                <Link href="/trackorder" >
+                                    Track your order
+                                </Link>
                                 <li><a>My Account</a></li>
-                                <li><a>Cart</a></li>
-                                <li><a>Checkout</a></li>
+                                <Link href="/cart" >
+                                    Cart
+                                </Link>
                                 <li><a>Wishlist</a></li>
                             </ul>
+                        </li>
+                        <li>
+                            <Link href="/cart" className='text-white' ><span><BsCart4></BsCart4></span> </Link>
                         </li>
 
                     </ul>

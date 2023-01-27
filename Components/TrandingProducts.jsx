@@ -3,7 +3,7 @@ import SingleTrandingProducts from "./SingleTrandingProducts";
 import { motion, AnimatePresence } from "framer-motion"
 
 
-const TrandingProducts = ({ isVisible }) => {
+const TrandingProducts = () => {
 
     const products = [
         {

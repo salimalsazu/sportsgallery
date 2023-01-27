@@ -1,9 +1,7 @@
 import { AiFillStar } from 'react-icons/ai';
-import watch from '../Assets/Product/watch.jpg'
-import { BsCart4 } from 'react-icons/bs';
 import Image from 'next/image';
-
-
+import { GrView } from 'react-icons/gr';
+import Link from 'next/link'
 
 
 const SingleTrandingProducts = ({ p }) => {
@@ -18,7 +16,9 @@ const SingleTrandingProducts = ({ p }) => {
                     alt="Picture of the author"
                 />
                 <div className='absolute -bottom-52 group-hover:bottom-0 right-2 left-2 transition-all duration-500 font-extrabold text-lg flex justify-center items-center ' >
-                    <button className='bg-black flex items-center px-4 gap-1 py-2 text-white mt-20 uppercase' ><span><BsCart4></BsCart4></span>Add to Cart</button>
+                    <Link href='/detailspage' >
+                        <button className='bg-yellow-500 flex items-center px-4 gap-1 py-2 text-black mt-20 uppercase' ><span><GrView></GrView></span>Quick View</button>
+                    </Link>
                     {/* <button className='bg-yellow-500 flex items-center gap-1 px-4 py-4 text-black mt-20 uppercase' ><span><GrView></GrView></span> Quick View</button> */}
                 </div>
             </div>
