@@ -8,6 +8,9 @@ import { BsCart4, BsFillArrowDownSquareFill, BsFillArrowUpSquareFill } from 'rea
 const DetailsProduct = () => {
 
     const [count, setCount] = useState(1)
+
+
+
     return (
         <div className='mt-10' >
             <div>
@@ -34,6 +37,39 @@ const DetailsProduct = () => {
                         <AiFillStar></AiFillStar>
                     </div>
                     <h2 className='text-justify font-extralight'> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque neque qui ipsum aperiam, deserunt magnam dolores, iusto quia pariatur voluptatum minus quo? Expedita cum natus hic eaque minima ratione magnam? </h2>
+
+
+                    <div class="relative rounded-md flex gap-1 items-center">
+                        <h1 className='font-extrabold' >Select Size</h1>
+                        <select class="form-input py-2 px-3 leading-5 rounded-md bg-white border placeholder-gray-500 text-gray-700 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800">
+                            <option>SM</option>
+                            <option>MD</option>
+                            <option>XL</option>
+                        </select>
+                    </div>
+
+
+                    <div class="flex items-center gap-3 ">
+
+                        <h1 className='font-extrabold' >Select Color</h1>
+                        <label class="inline-flex items-center">
+                            <input type="radio" class="form-radio text-indigo-600 transition duration-150 ease-in-out" name="radio-button-example" value="option1" />
+                            <span class="ml-2">Red</span>
+                        </label>
+
+                        <label class="inline-flex items-center ">
+                            <input type="radio" class="form-radio text-indigo-600 transition duration-150 ease-in-out" name="radio-button-example" value="option2" />
+                            <span class="ml-2">White</span>
+                        </label>
+
+                        <label class="inline-flex items-center ">
+                            <input type="radio" class="form-radio text-indigo-600 transition duration-150 ease-in-out" name="radio-button-example" value="option3" />
+                            <span class="ml-2">Gray</span>
+                        </label>
+                    </div>
+
+
+
                     <p><span className='font-extrabold' >SKU:</span> <span>42</span></p>
                     <p><span className='uppercase font-bold' >Category:</span><span className='ml-2' >Sports</span></p>
                     <div className='flex  items-center ' >
@@ -43,16 +79,27 @@ const DetailsProduct = () => {
                         </span>
                         <p className='text-xs' >ADD TO WISHLIST</p>
                     </div>
-
+                    <div>
+                        {
+                            count === 10 && <h1 className='text-red-600 font-extrabold' > For bulk order, contact with us !!!</h1>
+                        }
+                    </div>
                     <div className='flex items-center mt-5' >
 
                         <div className='flex mr-10 items-center border border-gray-600 p-1' >
                             <p className='mr-5 ' >{count}</p>
                             <span  >
-                                <BsFillArrowUpSquareFill className='text-lg' onClick={() => { setCount(count + 1) }} ></BsFillArrowUpSquareFill>
+                                {
+                                    count != 10 ? <> <BsFillArrowUpSquareFill className='text-lg ' onClick={() => { setCount(count + 1) }} ></BsFillArrowUpSquareFill>
+
+                                    </> :
+                                        <>
+                                            <BsFillArrowDownSquareFill className='text-lg hidden ' onClick={() => { setCount(count - 1) }} ></BsFillArrowDownSquareFill>
+                                        </>
+                                }
                                 {
                                     count === 1 ? <>
-                                        <BsFillArrowDownSquareFill className='text-lg hidden' onClick={() => { setCount(count - 1) }} ></BsFillArrowDownSquareFill>
+                                        <BsFillArrowDownSquareFill className='text-lg hidden ' onClick={() => { setCount(count - 1) }} ></BsFillArrowDownSquareFill>
                                     </>
                                         :
                                         <>
