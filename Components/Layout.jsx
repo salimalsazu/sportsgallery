@@ -1,4 +1,6 @@
+
 import Navbar from "./Navbar";
+
 import TopNav from "./TopNav";
 
 
@@ -7,6 +9,7 @@ const Layout = ({ children }) => {
         <div>
             <TopNav></TopNav>
             <Navbar></Navbar>
+
             {children}
         </div>
     );

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { BsCart4 } from 'react-icons/bs';
 
 
+
 const Navbar = () => {
     return (
         // <div>
@@ -106,7 +107,7 @@ const Navbar = () => {
                 </div>
 
             </div>
-        </div>
+        </div >
 
     );
 };
