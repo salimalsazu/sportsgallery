@@ -1,22 +1,17 @@
 const mongoose = require('mongoose');
 
 const sportingsSchema = new mongoose.Schema({
-    title: {
+    name: {
         type: String,
         required: [true, 'Please name the Sport'],
-        unique: true,
         maxlength: [300, 'Please Keep the title short'],
-        trim: true
     },
-    photo: {
-        type: String,
-        require: true,
-        unique: true
-    },
+
     price: {
         type: Number,
         require: true,
-    }
+    },
+
 
 
 })

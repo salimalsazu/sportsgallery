@@ -1,38 +1,40 @@
 import dbConnect from '../../../db/dbconnect'
 
-import Sport from '../../../modals/Sports'
+import watch from '../../../modals/watch'
 
-
-
-dbConnect()
+dbConnect();
 
 
 export default async (req, res) => {
+
     const { method } = req
 
     switch (method) {
-        case 'GET':
-            try {
-                const sportings = await Sport.find({})
-                res.status(200).json({ success: true, sport: sportings })
 
+        case "GET":
+            try {
+
+                const watches = await watch.find({})
+                res.status(200).json({ success: true, watches })
             } catch (error) {
                 res.status(400).json({ success: false })
             }
             break;
 
-        case 'POST':
+        case "POST":
             try {
-                const sport = await Sport.create(req.body)
-                console.log(sport);
-                res.status(200).json({ success: true, sport: sport })
 
+                const singlewatch = await watch.create(req.body)
+                res.status(200).json({ success: true, watch: singlewatch })
             } catch (error) {
                 res.status(400).json({ success: false })
             }
             break;
 
         default:
+            res.status(400).json({ success: false })
             break;
     }
+
+
 }

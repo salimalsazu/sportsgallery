@@ -1,14 +1,15 @@
 
 import { useForm } from "react-hook-form";
 import React, { useState } from 'react';
-
+import axios from "axios";
+import { Router } from "next/router";
+import Swal from 'sweetalert2'
 
 const addproduct = () => {
 
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
-
+    const onSubmit = async (data) => {
 
         const addProducts = {
             name: data.name,
@@ -19,8 +20,7 @@ const addproduct = () => {
             quantity: data.quantity,
             sku: data.sku,
             description: data.description,
-            file: data.file,
-
+            // file: data.file,
             detail: [
                 {
                     details1: data.details1,
@@ -33,6 +33,29 @@ const addproduct = () => {
 
         }
         console.log(addProducts)
+
+
+        try {
+
+            const res = await axios('http://localhost:3000/api/watch', {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json"
+                },
+                data: JSON.stringify(addProducts)
+            })
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Product has beed created Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
 
@@ -138,18 +161,15 @@ const addproduct = () => {
                 </div>
 
 
-                <input
+                {/* <input
                     type="file"
-                    name="image"
                     {...register("file")}
                     className="border rounded p-2 mb-2"
-                />
+                /> */}
                 <div className='flex gap-3  bg-gray-100 p-5 m-5' >
-                    <textArea
+                    <textarea
                         {...register("description")}
                         placeholder="Description"
-
-
                         className="border rounded p-2 mb-2 w-full"
                     />
                 </div>

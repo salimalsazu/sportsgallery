@@ -21,10 +21,10 @@ const orders = () => {
                 </div>
             </form>
             <div className="overflow-x-auto mx-5 mt-10 ">
-                <table className="table w-full ">
+                <table className="table w-full  ">
 
                     <thead>
-                        <tr>
+                        <tr >
                             <th>SL No</th>
                             <th>Order No</th>
                             <th>product Image</th>
@@ -35,7 +35,7 @@ const orders = () => {
                             <th>Quantity</th>
                             <th>Mobile</th>
                             <th>Veiw Details</th>
-                            <th>Invoice</th>
+                           
 
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@ const orders = () => {
                         <tr>
                             <th>1</th>
                             <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
+                            <td>Quality Control </td>
                             <td>Blue</td>
                             <td>Blue</td>
                             <td>Blue</td>
@@ -52,7 +52,7 @@ const orders = () => {
                             <td>Blue</td>
                             <td>Blue</td>
                             <td>Blue</td>
-                            <td>Blue</td>
+                           
                         </tr>
 
                     </tbody>

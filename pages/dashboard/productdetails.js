@@ -31,6 +31,7 @@ const productdetails = () => {
                             <th>Price</th>
                             <th>Discount Price</th>
                             <th>Quantity</th>
+                            <th>Details</th>
 
                         </tr>
                     </thead>
@@ -43,6 +44,7 @@ const productdetails = () => {
                             <td>Blue</td>
                             <td>Blue</td>
                             <td>Blue</td>
+                            <td>View</td>
                         </tr>
 
                     </tbody>
