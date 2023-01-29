@@ -24,9 +24,28 @@ const productdetails = ({ data }) => {
                     </button>
                 </div>
             </form>
-            {
-                productDetail.map(p => <SingleProductDetails p={p} key={p._id} ></SingleProductDetails>)
-            }
+
+            <div className="overflow-x-auto mx-20 mt-10 ">
+                <table className="table w-full ">
+
+                    <thead>
+                        <tr>
+                            <th>SL No</th>
+                            <th>Image</th>
+                            <th>Product title</th>
+                            <th>Price</th>
+                            <th>Discount Price</th>
+                            <th>Quantity</th>
+                            <th>SKU</th>
+
+                        </tr>
+                    </thead>
+                    {
+                        productDetail.map((p, index) => <SingleProductDetails p={p} index={index} key={p._id} ></SingleProductDetails>)
+                    }
+                </table>
+            </div>
+
         </div>
     );
 };

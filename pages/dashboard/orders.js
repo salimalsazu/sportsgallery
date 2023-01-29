@@ -1,6 +1,9 @@
 import React from 'react';
 
-const orders = () => {
+const orders = ({ data }) => {
+
+    const order = data.order;
+
     return (
         <div className='mx-auto mt-10'>
             <h1 className='uppercase font-extrabold text-center' >Order Details</h1>
@@ -35,31 +38,47 @@ const orders = () => {
                             <th>Quantity</th>
                             <th>Mobile</th>
                             <th>Veiw Details</th>
-                           
+
 
                         </tr>
                     </thead>
-                    <tbody>
+                    {
+                        order.map((o, index) => <tbody>
 
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control </td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                           
-                        </tr>
+                            <tr>
+                                <th>{index + 1}</th>
+                                <td>{o._id}</td>
+                                <td>Image </td>
+                                <td>{o.name}</td>
+                                <td>{o.productId}</td>
+                                <td>{o.price}</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>{o.mobile}</td>
+                                <td><button className='px-4 py-1 bg-black text-white' >View</button></td>
 
-                    </tbody>
+                            </tr>
+
+                        </tbody>)
+                    }
                 </table>
             </div>
         </div>
     );
 };
+
+
+export async function getServerSideProps() {
+    const res = await fetch('http://localhost:3000/api/orders')
+    // console.log(res.data.watches)
+    const data = await res.json()
+    // const { watches } = res.data
+    // console.log(watches)
+    return {
+        props: { data }
+    }
+}
+
+
 
 export default orders;

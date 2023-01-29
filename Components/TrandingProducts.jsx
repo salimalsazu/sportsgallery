@@ -9,58 +9,11 @@ const TrandingProducts = ({ data }) => {
     console.log(data);
     const products = data.watches;
 
-    // const products = [
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/BZVCPMN/cs-home-shop-7.jpg',
-    //         "price": 100
-    //     },
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/HXNBtT3/cs-home-shop-8.jpg',
-    //         "price": 100
-    //     },
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/FsqCJZW/cs-home-shop-9.jpg',
-    //         "price": 100
-    //     },
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/jvXfhHc/cs-home-shop-10.jpg',
-    //         "price": 100
-    //     },
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/XbGXzLD/cs-home-shop-11.jpg',
-    //         "price": 100
-    //     },
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/qByygbh/cs-home-shop-12.jpg',
-    //         "price": 100
-    //     },
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/zfdKp66/cs-home-shop-13.jpg',
-    //         "price": 100
-    //     },
-    //     {
-    //         "title": "watch",
-    //         "img": 'https://i.ibb.co/0QZcCSB/cs-home-shop-14.jpg',
-    //         "price": 100
-    //     }
-
-    // ]
-
     // const randomProduct = products[Math.floor(Math.random() * products.length)];
 
     // console.log(randomProduct);
 
     return (
-
-
-
 
         <div className="my-20 flex flex-col justify-center items-center" >
 

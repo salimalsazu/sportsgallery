@@ -7,8 +7,9 @@ import { MdOutlineFavoriteBorder, MdStarRate, MdAutoFixHigh } from 'react-icons/
 import { TbJewishStar } from 'react-icons/tb';
 import Link from 'next/link'
 
-
 const Dashboard = () => {
+
+
     return (
         <div>
             <div className='grid lg:grid-cols-4 grid-cols-1 justify-center items-center mx-10 mt-10 gap-5' >

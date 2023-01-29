@@ -2,10 +2,11 @@
 import { useForm } from "react-hook-form";
 import React, { useState } from 'react';
 import axios from "axios";
-import { Router } from "next/router";
 import Swal from 'sweetalert2'
 
 const addproduct = () => {
+
+    const [hide, setHide] = useState(false)
 
     const { register, handleSubmit } = useForm();
 
@@ -51,7 +52,7 @@ const addproduct = () => {
                 console.log(addProducts)
 
                 try {
-
+                    setHide(false)
                     const res = axios('http://localhost:3000/api/watch', {
                         method: "POST",
                         headers: {
@@ -59,6 +60,7 @@ const addproduct = () => {
                         },
                         data: JSON.stringify(addProducts)
                     })
+                    setHide(true);
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -79,26 +81,27 @@ const addproduct = () => {
 
 
     return (
-        <div className='flex justify-center items-center mt-20'>
+        <div className='mx-auto w-full  mt-20 '>
+            <h1 className="uppercase font-extrabold text-center" >Add Your Product</h1>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
 
                 <div className='flex gap-3 bg-gray-100 p-5 m-5' >
                     <input
                         {...register("name")}
                         placeholder="Name"
-                        className="border rounded p-2 mb-2"
+                        className="border w-full rounded p-2 mb-2"
                     />
                     <input
                         {...register("price")}
                         placeholder="Price"
-                        className="border rounded p-2 mb-2"
+                        className="border w-full rounded p-2 mb-2"
                     />
                 </div>
 
                 <div className='flex gap-3  bg-gray-100 p-5 m-5' >
                     <select
                         {...register("category")}
-                        className="border rounded p-2 mb-2"
+                        className="border w-full rounded p-2 mb-2"
                     >
                         <option value="">Select category</option>
                         <option value="Watch">Sports Watch</option>
@@ -116,7 +119,7 @@ const addproduct = () => {
                     </select>
                     <select
                         {...register("color")}
-                        className="border rounded p-2 mb-2"
+                        className="border w-full rounded p-2 mb-2"
                     >
                         <option value="" >Select Color</option>
                         <option value="BLack">Black</option>
@@ -128,12 +131,12 @@ const addproduct = () => {
                     <input
                         {...register("quantity")}
                         placeholder="Quantity"
-                        className="border rounded p-2 mb-2"
+                        className="border w-full rounded p-2 mb-2"
                     />
                     <input
                         {...register("sku")}
                         placeholder="SKU"
-                        className="border rounded p-2 mb-2"
+                        className="border w-full rounded p-2 mb-2"
                     />
                 </div>
 
@@ -156,15 +159,11 @@ const addproduct = () => {
                         <input
                             {...register("details3")}
                             placeholder="details3"
-
-
                             className="border rounded p-2 mb-2"
                         />
                         <input
                             {...register("details4")}
                             placeholder="details4"
-
-
                             className="border rounded p-2 mb-2"
                         />
                         <input
@@ -177,24 +176,34 @@ const addproduct = () => {
                 </div>
 
 
-                <input
-                    type="file"
-                    {...register("img", {
-                        required: 'Photo is required'
-                    })}
-                    className="border rounded p-2 mb-2"
-                />
+                <div className='flex gap-3  bg-gray-100 p-5 m-5'>
+                    <input
+                        type="file"
+                        {...register("img", {
+                            required: 'Photo is required'
+                        })}
+                        className="border w-full rounded p-2 mb-2"
+                    />
+                </div>
                 <div className='flex gap-3  bg-gray-100 p-5 m-5' >
                     <textarea
                         {...register("description")}
                         placeholder="Description"
-                        className="border rounded p-2 mb-2 w-full"
+                        className="border w-full rounded p-2 mb-2 "
                     />
                 </div>
 
-                <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">
-                    Submit
-                </button>
+                <div className="flex justify-center items-center" >
+                    {
+                        hide ? <button disabled className="bg-gray-200 text-white p-2 my-10 w-20 rounded-md" type="submit">
+                            Submit
+                        </button>
+
+                            : <button onClick={() => setHide(hide)} className="bg-blue-500 text-white p-2 my-10 w-20 rounded-md" type="submit">
+                                Submit
+                            </button>
+                    }
+                </div>
 
 
             </form>

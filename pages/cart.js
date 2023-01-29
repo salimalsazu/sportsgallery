@@ -4,7 +4,16 @@ import watch from '../Assets/Product/watch.jpg'
 import { AiFillDelete } from 'react-icons/ai';
 import { BsFillBagFill } from 'react-icons/bs';
 
-const cart = () => {
+const cart = ({ data }) => {
+
+    const random = data.watches;
+
+    // const randomProduct = random[Math.floor(Math.random() * random.length)];
+
+
+    // console.log(randomProduct);
+
+
     return (
         <div className='lg:mx-10 lg:my-20 mx-5'>
             <h1 className='uppercase font-extrabold text-5xl' >Cart</h1>
@@ -67,10 +76,38 @@ const cart = () => {
 
             </div>
             <div >
-                <MissProduct></MissProduct>
+
+                <div className='mt-10' >
+                    <div>
+                        <h1 className='uppercase font-extrabold text-lg mb-2' >You Miss The Product</h1>
+                        <hr className='border-gray-900 border-b-0' />
+                    </div>
+
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center items-center mt-10' >
+                        {
+                            random.map(r => <MissProduct r={r} key={r._id}></MissProduct>)
+                        }
+
+                    </div>
+                    {/* <MissProduct randomProduct={randomProduct} ></MissProduct> */}
+                </div>
             </div>
         </div>
     );
 };
+
+
+export async function getServerSideProps() {
+    const res = await fetch('http://localhost:3000/api/watch')
+    // console.log(res.data.watches)
+    const data = await res.json()
+    // const { watches } = res.data
+    // console.log(watches)
+    return {
+        props: { data }
+    }
+}
+
+
 
 export default cart;

@@ -21,7 +21,7 @@ export default function Home({ data }) {
         style={{ scaleX: scrollYProgress }}
       />
       <Hero />
-      <WhatsNew />
+      <WhatsNew data={data} ></WhatsNew>
       <Categories />
       <TrandingProducts data={data} ></TrandingProducts>
       <SecondCategory></SecondCategory>
