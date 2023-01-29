@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Image from 'next/image'
-import product from '../Assets/Slider/carousel-2.png'
 import { AiFillStar } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
 import { BsCart4, BsFillArrowDownSquareFill, BsFillArrowUpSquareFill } from 'react-icons/bs';
+import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const DetailsProduct = ({ data }) => {
 
@@ -11,6 +12,42 @@ const DetailsProduct = ({ data }) => {
     const [count, setCount] = useState(1)
 
     const [disabled, setDisabled] = useState(false)
+
+
+    const requestStock = () => {
+
+        const stock = {
+            ...data.watches
+        }
+
+        // console.log(stock)
+
+        try {
+
+            const res = axios('http://localhost:3000/api/stocks', {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json"
+                },
+                data: JSON.stringify(stock)
+            })
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: 'Thanks for Requesting',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
+
+        } catch (error) {
+            console.log(error);
+        }
+
+
+
+    }
+
 
     return (
         <div className='mt-10' >
@@ -44,7 +81,7 @@ const DetailsProduct = ({ data }) => {
 
                     <div class="relative rounded-md flex gap-1 items-center">
                         {
-                            details.quantity > 1 && <div>
+                            details.quantity >= 1 && <div>
                                 <h1 className='font-extrabold' >Select Size</h1>
                                 <select onClick={() => { setDisabled(true) }} class="form-input py-2 px-3 leading-5 rounded-md bg-white border placeholder-gray-500 text-gray-700 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-50 active:text-gray-800">
                                     <option>SM</option>
@@ -59,7 +96,7 @@ const DetailsProduct = ({ data }) => {
                     <div class="flex items-center gap-3 ">
 
                         {
-                            details.quantity > 1 && <div>
+                            details.quantity >= 1 && <div>
                                 <h1 className='font-extrabold' >Select Color</h1>
                                 <label onClick={() => { setDisabled(true) }} class="inline-flex items-center">
                                     <input type="radio" class="form-radio text-indigo-600 transition duration-150 ease-in-out" name="radio-button-example" value="option1" />
@@ -132,7 +169,7 @@ const DetailsProduct = ({ data }) => {
                         }
 
                         {
-                            details.quantity === 0 && <button className='bg-black px-6 ml-2 py-2 text-white flex items-center' > Request for Stock</button>
+                            details.quantity === 0 && <button onClick={requestStock} className='bg-black px-6 ml-2 py-2 text-white flex items-center' > Request for Stock</button>
                         }
 
                     </div>

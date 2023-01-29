@@ -84,6 +84,12 @@ const Dashboard = () => {
                                 <span>Wishlist</span>
                             </a>
                         </li>
+                        <li className='hover:bg-gray-100 hover:rounded '>
+                            <a rel="noopener noreferrer" href="/dashboard/requestedproduct" className="flex items-center p-2 space-x-3 rounded-md">
+                                <span><TbJewishStar></TbJewishStar></span>
+                                <span>Requested Product</span>
+                            </a>
+                        </li>
                     </ul>
 
                 </div>
