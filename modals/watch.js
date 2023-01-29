@@ -60,7 +60,11 @@ const watchSchema = new mongoose.Schema({
     },
     detail: [
         detailSchema
-    ]
+    ],
+    img: {
+        type: String,
+        require: true
+    }
 
 })
 

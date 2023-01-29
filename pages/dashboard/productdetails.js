@@ -1,6 +1,10 @@
 import React from 'react';
+import SingleProductDetails from './SingleProductDetails';
 
-const productdetails = () => {
+const productdetails = ({ data }) => {
+
+    const productDetail = data.watches;
+
     return (
         <div className='mx-auto mt-10'>
             <h1 className='uppercase font-extrabold text-center' >Product Details</h1>
@@ -20,38 +24,25 @@ const productdetails = () => {
                     </button>
                 </div>
             </form>
-            <div className="overflow-x-auto mx-20 mt-10 ">
-                <table className="table w-full ">
-
-                    <thead>
-                        <tr>
-                            <th>SL No</th>
-                            <th>Image</th>
-                            <th>Product title</th>
-                            <th>Price</th>
-                            <th>Discount Price</th>
-                            <th>Quantity</th>
-                            <th>Details</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>View</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+            {
+                productDetail.map(p => <SingleProductDetails p={p} key={p._id} ></SingleProductDetails>)
+            }
         </div>
     );
 };
+
+
+export async function getStaticProps() {
+    const res = await fetch('http://localhost:3000/api/watch')
+    // console.log(res.data.watches)
+    const data = await res.json()
+    // const { watches } = res.data
+    // console.log(watches)
+    return {
+        props: { data }
+    }
+}
+
+
 
 export default productdetails;

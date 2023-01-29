@@ -9,52 +9,69 @@ const addproduct = () => {
 
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = async (data) => {
+    const onSubmit = (data) => {
 
-        const addProducts = {
-            name: data.name,
-            price: data.price,
-            category: data.category,
-            size: data.size,
-            color: data.color,
-            quantity: data.quantity,
-            sku: data.sku,
-            description: data.description,
-            // file: data.file,
-            detail: [
-                {
-                    details1: data.details1,
-                    details2: data.details2,
-                    details3: data.details3,
-                    details4: data.details4,
-                    details5: data.details5
+
+        const image = data.img[0];
+        const formData = new FormData();
+        formData.append('image', image)
+        const url = 'https://api.imgbb.com/1/upload?key=a6f9b9970dcebe796e264ecdc5083f85'
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                console.log(imgData)
+                if (imgData.success) {
+                    console.log(imgData.data.url);
                 }
-            ]
 
-        }
-        console.log(addProducts)
+                const addProducts = {
+                    name: data.name,
+                    price: data.price,
+                    category: data.category,
+                    size: data.size,
+                    color: data.color,
+                    quantity: data.quantity,
+                    sku: data.sku,
+                    description: data.description,
+                    img: imgData.data.url,
+                    detail: [
+                        {
+                            details1: data.details1,
+                            details2: data.details2,
+                            details3: data.details3,
+                            details4: data.details4,
+                            details5: data.details5
+                        }
+                    ]
 
+                }
+                console.log(addProducts)
 
-        try {
+                try {
 
-            const res = await axios('http://localhost:3000/api/watch', {
-                method: "POST",
-                headers: {
-                    "content-Type": "application/json"
-                },
-                data: JSON.stringify(addProducts)
+                    const res = axios('http://localhost:3000/api/watch', {
+                        method: "POST",
+                        headers: {
+                            "content-Type": "application/json"
+                        },
+                        data: JSON.stringify(addProducts)
+                    })
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Product has beed created Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
+                } catch (error) {
+                    console.log(error);
+                }
+
             })
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Product has beed created Successfully',
-                showConfirmButton: false,
-                timer: 1500
-            })
-
-        } catch (error) {
-            console.log(error);
-        }
 
     }
 
@@ -80,20 +97,19 @@ const addproduct = () => {
 
                 <div className='flex gap-3  bg-gray-100 p-5 m-5' >
                     <select
-                        name="category"
                         {...register("category")}
                         className="border rounded p-2 mb-2"
                     >
-                        <option value="" disabled>Select category</option>
-                        <option value="Electronics">Sports Watch</option>
+                        <option value="">Select category</option>
+                        <option value="Watch">Sports Watch</option>
                         <option value="Fashion">Jersey</option>
-                        <option value="Home">Sports Item</option>
+                        <option value="Sports Item">Sports Item</option>
                     </select>
                     <select
                         {...register("size")}
                         className="border rounded p-2 mb-2"
                     >
-                        <option value="" disabled>Select Size</option>
+                        <option value="" >Select Size</option>
                         <option value="MD">MD</option>
                         <option value="XL">XL</option>
                         <option value="LG">LG</option>
@@ -102,7 +118,7 @@ const addproduct = () => {
                         {...register("color")}
                         className="border rounded p-2 mb-2"
                     >
-                        <option value="" disabled>Select Color</option>
+                        <option value="" >Select Color</option>
                         <option value="BLack">Black</option>
                         <option value="Yellow">Yellow</option>
                         <option value="White">White</option>
@@ -161,11 +177,13 @@ const addproduct = () => {
                 </div>
 
 
-                {/* <input
+                <input
                     type="file"
-                    {...register("file")}
+                    {...register("img", {
+                        required: 'Photo is required'
+                    })}
                     className="border rounded p-2 mb-2"
-                /> */}
+                />
                 <div className='flex gap-3  bg-gray-100 p-5 m-5' >
                     <textarea
                         {...register("description")}

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import user from '../Assets/user/PXL_20220310_052614784.MP.jpg'
 
-const Review = () => {
+const Review = ({ data }) => {
+
+    const details = data.watches;
 
     const [open, setOpen] = useState(1)
 
@@ -49,20 +51,23 @@ const Review = () => {
             </div>
 
             <div className={open === 1 ? "block" : "hidden"} id="link1" >
-                <h2 className='text-justify font-extralight md:w-[450px] mt-5'> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque neque qui ipsum aperiam, deserunt magnam dolores, iusto quia pariatur voluptatum minus quo? Expedita cum natus hic eaque minima ratione magnam? </h2>
+                <h2 className='text-justify font-extralight md:w-[450px] mt-5'> {details.description} </h2>
 
             </div>
             <div className={open === 2 ? "block" : "hidden"} id="link2" >
                 <h1><span className='font-extrabold mt-5' >Brand:</span> Microwear</h1>
                 <p><span className='font-extrabold mt-5'  >Warranty Information:</span> 6 Months warranty (Please preserve your box to claim warranty)</p>
                 <p className='font-extrabold' >Specifications:</p>
-                <ul>
-                    <li>Screen Size: Bezel Less 2.2-inch Giant IPS Retina HD Display</li>
-                    <li>Screen Size: 428*518 pixels</li>
-                    <li>RAM/ROM: 192/128 MB</li>
-                    <li>Calling Feature: Bluetooth Calling</li>
-                    <li>Battery: 450 mAh | Wireless Charging</li>
-                </ul>
+                {
+                    details.detail.map((d) => <ul key={d._id}>
+
+                        <li>{d.details1}</li>
+                        <li>{d.details2}</li>
+                        <li>{d.details3}</li>
+                        <li>{d.details4}</li>
+                        <li>{d.details5}</li>
+                    </ul>)
+                }
 
             </div>
             <div className={open === 3 ? "block" : "hidden"} id="link3" >

@@ -7,7 +7,8 @@ import { motion, useScroll } from "framer-motion";
 
 
 
-export default function Home() {
+export default function Home({ data }) {
+
 
 
   const { scrollYProgress } = useScroll();
@@ -22,8 +23,20 @@ export default function Home() {
       <Hero />
       <WhatsNew />
       <Categories />
-      <TrandingProducts />
+      <TrandingProducts data={data} ></TrandingProducts>
       <SecondCategory></SecondCategory>
     </div>
   )
 }
+
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:3000/api/watch')
+  // console.log(res.data.watches)
+  const data = await res.json()
+  // const { watches } = res.data
+  // console.log(watches)
+  return {
+    props: { data }
+  }
+}
+
