@@ -5,6 +5,8 @@ import { AiFillHeart } from 'react-icons/ai';
 import { BsCart4, BsFillArrowDownSquareFill, BsFillArrowUpSquareFill } from 'react-icons/bs';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import Link from 'next/link'
+
 
 const DetailsProduct = ({ data }) => {
 
@@ -165,7 +167,9 @@ const DetailsProduct = ({ data }) => {
                         {
                             !disabled ? <button disabled className='bg-gray-300 px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button> :
 
-                                <button className='bg-black px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button>
+                                <Link href="/cart">
+                                    <button className='bg-black px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button>
+                                </Link>
                         }
 
                         {
