@@ -1,8 +1,30 @@
 const mongoose = require('mongoose');
 
+const detailSchema = new mongoose.Schema({
+    details1: {
+        type: String,
+        require: true
+    },
+    details2: {
+        type: String,
+        require: true
+    },
+    details3: {
+        type: String,
+        require: true
+    },
+    details4: {
+        type: String,
+        require: true
+    },
+    details5: {
+        type: String,
+        require: true
+    }
+})
 
 
-const stockSchema = new mongoose.Schema({
+const cartSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -36,15 +58,22 @@ const stockSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    detail: [
+        detailSchema
+    ],
     img: {
         type: String,
         require: true
     },
-    mobile: {
+    subTotal: {
+        type: Number,
+        require: true
+    },
+    item: {
         type: Number,
         require: true
     }
 
 })
 
-module.exports = mongoose.models.stockCollection || mongoose.model('stockCollection', stockSchema)
+module.exports = mongoose.models.cartCollection || mongoose.model('cartCollection', cartSchema)

@@ -6,26 +6,113 @@ import { BsCart4, BsFillArrowDownSquareFill, BsFillArrowUpSquareFill } from 'rea
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import Link from 'next/link'
-
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 const DetailsProduct = ({ data }) => {
+    const { register, handleSubmit } = useForm();
+    const router = useRouter();
+    const [count, setCount] = useState(1)
+    const [disabled, setDisabled] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const [hide, setHide] = useState(false);
+
+    const OpenModal = () => {
+        setIsOpen(!isOpen);
+    };
+
 
     const details = data.watches;
-    const [count, setCount] = useState(1)
-
-    const [disabled, setDisabled] = useState(false)
 
 
-    const requestStock = () => {
+    const price = details.price
+    const subTotal = count * price;
+    const item = count;
 
-        const stock = {
-            ...data.watches
+    const quantity = details.quantity - count;
+
+    const addToCart = (id) => {
+
+        const cartProduct = {
+            subTotal,
+            item,
+            ...details
         }
-
-        // console.log(stock)
+        console.log(cartProduct);
 
         try {
 
+            const res = axios('http://localhost:3000/api/cart', {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json"
+                },
+                data: JSON.stringify(cartProduct)
+            })
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Successfully Added',
+                showConfirmButton: false,
+                timer: 500
+            })
+            router.push('/cart')
+
+        } catch (error) {
+            console.log(error);
+        }
+
+        const updateData = {
+            quantity
+        }
+
+
+        try {
+
+            const res = axios(`http://localhost:3000/api/watch/${id}`, {
+                method: "PUT",
+                headers: {
+                    "content-Type": "application/json"
+                },
+                data: JSON.stringify(updateData)
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+    const onSubmit = (data) => {
+
+        const stock = {
+            name: details.name,
+            price: details.price,
+            productIdd: details._id,
+            sku: details.sku,
+            category: details.category,
+            color: details.color,
+            img: details.img,
+            mobile: data.mobile
+        }
+
+        console.log(stock)
+
+        try {
+            setHide(false);
             const res = axios('http://localhost:3000/api/stocks', {
                 method: "POST",
                 headers: {
@@ -40,14 +127,11 @@ const DetailsProduct = ({ data }) => {
                 showConfirmButton: false,
                 timer: 2000
             })
-
+            setHide(true);
 
         } catch (error) {
             console.log(error);
         }
-
-
-
     }
 
 
@@ -135,15 +219,20 @@ const DetailsProduct = ({ data }) => {
                             count === 10 && <h1 className='text-red-600 font-extrabold' > For bulk order, contact with us !!!</h1>
                         }
                     </div>
+                    <div className='my-2' >
+                        {
+                            count >= 2 && <h1>SubTotal: ${subTotal}.00</h1>
+                        }
+                    </div>
                     <div className='flex items-center mt-5' >
 
                         <div  >
                             {
-                                details.quantity > 1 && <div className='flex mr-10 items-center border border-gray-600 p-1' >
+                                details.quantity >= 1 && <div className='flex mr-10 items-center border border-gray-600 p-1' >
                                     <p className='mr-5 ' >{count}</p>
                                     <span  >
                                         {
-                                            count != 10 ? <> <BsFillArrowUpSquareFill className='text-lg ' onClick={() => { setCount(count + 1) }} ></BsFillArrowUpSquareFill>
+                                            count != 10 && details.quantity > count ? <> <BsFillArrowUpSquareFill className='text-lg ' onClick={() => { setCount(count + 1) }} ></BsFillArrowUpSquareFill>
 
                                             </> :
                                                 <>
@@ -167,13 +256,47 @@ const DetailsProduct = ({ data }) => {
                         {
                             !disabled ? <button disabled className='bg-gray-300 px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button> :
 
-                                <Link href="/cart">
-                                    <button className='bg-black px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button>
+                                <Link href="#">
+                                    <button onClick={() => addToCart(details._id)} className='bg-black px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button>
                                 </Link>
                         }
 
+                        <div className='z-50'>
+                            {isOpen && (
+                                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+                                    <div className="w-full max-w-md bg-lime-300 rounded p-8">
+                                        <form onSubmit={handleSubmit(onSubmit)} action="" className='flex'>
+                                            <input
+
+                                                {...register("mobile")}
+                                                className="bg-white focus:outline-none focus:shadow-outline border border-gray-300  py-2 px-4 block w-full appearance-none leading-normal"
+                                                type="text"
+                                                placeholder="Enter Your Mobile Number"
+                                            />
+
+                                            <div>
+                                                {
+                                                    hide ? <button type='submit' className=' hidden  px-6 py-2 bg-black text-white' >Request</button> :
+
+                                                        <button onClick={() => { setHide(hide) }} type='submit' className='px-6 py-2 bg-black text-white' >Request</button>
+                                                }
+                                            </div>
+                                        </form>
+
+
+                                        <button className="bg-red-400 z-50 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" onClick={OpenModal}>
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
+
+                        </div>
+
+
                         {
-                            details.quantity === 0 && <button onClick={requestStock} className='bg-black px-6 ml-2 py-2 text-white flex items-center' > Request for Stock</button>
+                            details.quantity === 0 && <button onClick={OpenModal} className='bg-black px-6 ml-2 py-2 text-white flex items-center' > Request for Stock</button>
                         }
 
                     </div>

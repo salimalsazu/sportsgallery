@@ -2,7 +2,9 @@ import SingleProduct from './SingleProduct';
 import { motion } from "framer-motion";
 
 
+
 const WhatsNew = ({ data }) => {
+
 
     const nProduct = data.watches;
 
@@ -22,7 +24,9 @@ const WhatsNew = ({ data }) => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-3' >
+            <div
+
+                className=' grid grid-cols-1 lg:grid-cols-2 gap-3' >
                 {
                     nProduct?.slice(0, 2).map(n => <SingleProduct n={n} key={n._id}></SingleProduct>)
                 }

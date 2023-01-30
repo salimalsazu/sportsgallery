@@ -62,7 +62,7 @@ const addproduct = () => {
                     })
                     setHide(true);
                     Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: 'Product has beed created Successfully',
                         showConfirmButton: false,

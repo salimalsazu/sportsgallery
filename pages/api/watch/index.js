@@ -31,6 +31,16 @@ export default async (req, res) => {
             }
             break;
 
+        case "PUT":
+            try {
+
+                const singlewatch = await watch.updateOne(req.body)
+                res.status(200).json({ success: true, watch: singlewatch })
+            } catch (error) {
+                res.status(400).json({ success: false })
+            }
+            break;
+
         default:
             res.status(400).json({ success: false })
             break;

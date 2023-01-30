@@ -1,7 +1,7 @@
 
 import dbConnect from '../../../db/dbconnect'
 
-import watch from '../../../modals/watch'
+import cart from '../../../modals/cart'
 
 dbConnect();
 
@@ -13,12 +13,12 @@ export default async (req, res) => {
         case 'GET':
 
             try {
-                const watches = await watch.findById(id)
-                if (!watches) {
+                const carts = await cart.findById(id)
+                if (!carts) {
                     res.status(400).json({ success: false })
                 }
 
-                res.status(200).json({ success: true, watches })
+                res.status(200).json({ success: true, carts })
 
             } catch (error) {
 
@@ -27,19 +27,18 @@ export default async (req, res) => {
             }
             break;
 
-
         case 'PUT':
 
             try {
-                const watches = await watch.findByIdAndUpdate(id, req.body, {
+                const carts = await cart.findByIdAndUpdate(id, req.body, {
                     new: true,
                     runValidators: true
 
                 })
-                if (!watches) {
+                if (!carts) {
                     res.status(400).json({ success: false })
                 }
-                res.status(200).json({ success: true, watches })
+                res.status(200).json({ success: true, carts })
 
             } catch (error) {
                 res.status(400).json({ success: false })
@@ -49,18 +48,16 @@ export default async (req, res) => {
         case 'DELETE':
 
             try {
-                const watches = await watch.deleteOne({ _id: id })
-                if (!watches) {
+                const carts = await cart.deleteOne({ _id: id })
+                if (!carts) {
                     res.status(400).json({ success: false })
                 }
-                res.status(200).json({ success: true, watches })
+                res.status(200).json({ success: true, carts })
 
             } catch (error) {
                 res.status(400).json({ success: false })
             }
             break;
-
-
 
         default:
             res.status(400).json({ success: false })

@@ -14,6 +14,7 @@ const requestedproduct = ({ data }) => {
                         <th>Requested Id</th>
                         <th>SKU</th>
                         <th>Price</th>
+                        <th>Mobile</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@ const requestedproduct = ({ data }) => {
                                 <td>{s._id}</td>
                                 <td>{s.sku}</td>
                                 <td>{s.price}</td>
+                                <td>{s.mobile}</td>
                                 <td><button className='bg-black text-white rounded-full px-4' >Pending</button></td>
                             </tr>)
                     }
