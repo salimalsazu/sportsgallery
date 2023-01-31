@@ -12,7 +12,7 @@ const cart = ({ data }) => {
 
 
     const random = data.watches;
-
+    console.log(random)
     // const randomProduct = random[Math.floor(Math.random() * random.length)];
 
 
@@ -28,6 +28,7 @@ const cart = ({ data }) => {
     }, [])
 
     const cart = carts.carts;
+    console.log(cart);
 
     const total = cart?.reduce((accumulator, object) => {
         return accumulator + object.subTotal;
@@ -35,10 +36,13 @@ const cart = ({ data }) => {
 
     // console.log(total);
 
+    // const quantity = data.quantity + cart.item;
 
     const router = useRouter();
     // const deleteCart = query?.id;
     // console.log(deleteCart)
+
+
 
     const handleDelete = async (id) => {
         try {
@@ -57,9 +61,23 @@ const cart = ({ data }) => {
 
 
 
+        // const handleQuantity = {
+        //     quantity: quantity + item
+        // }
 
+        // console.log(handleQuantity);
+        // try {
+        //     const res = axios(`http://localhost:3000/api/watch/${id}`, {
+        //         method: "PUT",
+        //         headers: {
+        //             "content-Type": "application/json"
+        //         },
+        //         data: JSON.stringify(handleQuantity)
+        //     })
 
-
+        // } catch (error) {
+        //     console.log(error);
+        // }
 
 
     }
@@ -133,7 +151,7 @@ const cart = ({ data }) => {
                         <p className='my-10' ><span className='uppercase font-extrabold mr-28 ' >Total</span><span> ${total}.00</span></p>
                     </div>
                     <div className=' mx-auto'>
-                        <button onClick={handleCheckOut} className='uppercase bg-yellow-500  font-bold text-gray-700 hover:border hover:bg-gray-400  px-10 py-3' >Proceed to checkout</button>
+                        <button className='uppercase bg-yellow-500  font-bold text-gray-700 hover:border hover:bg-gray-400  px-10 py-3' >Proceed to checkout</button>
                     </div>
                 </div>
 

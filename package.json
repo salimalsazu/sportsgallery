@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "13.1.4",
+    "aos": "^2.3.4",
     "axios": "^1.2.4",
     "daisyui": "^2.47.0",
     "framer-motion": "^8.5.2",
