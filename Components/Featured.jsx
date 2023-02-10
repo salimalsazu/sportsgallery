@@ -12,7 +12,7 @@ const Featured = ({ data }) => {
     }
 
     return (
-        <div className='grid grid-cols-4 gap-5 mx-10'>
+        <div className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-5 mx-10'>
             <div>
                 <h1 className='font-extrabold text-xl' >Featured</h1>
                 <div className='flex flex-col gap-5 mt-5'>
