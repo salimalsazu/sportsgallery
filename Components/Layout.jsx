@@ -8,8 +8,11 @@ import TopNav from "./TopNav";
 const Layout = ({ children }) => {
     return (
         <div>
-            <TopNav></TopNav>
-            <Navbar></Navbar>
+            <div className="sticky top-0 z-50 bg-white" >
+                <TopNav></TopNav>
+                <hr />
+                <Navbar></Navbar>
+            </div>
 
             {children}
             <Footer></Footer>
