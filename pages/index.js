@@ -7,6 +7,7 @@ import WhatsNew from "@/Components/WhatsNew";
 import { motion, useScroll } from "framer-motion";
 import HeroOne from "@/Components/HeroOne";
 import BigSale from "@/Components/BigSale";
+import Featured from "@/Components/Featured";
 
 
 export default function Home({ data }) {
@@ -30,6 +31,7 @@ export default function Home({ data }) {
       <BigSale></BigSale>
       <TrandingProducts data={data} ></TrandingProducts>
       <SecondCategory></SecondCategory>
+      <Featured data={data} ></Featured>
       {/* <SubHero></SubHero> */}
     </div>
   )

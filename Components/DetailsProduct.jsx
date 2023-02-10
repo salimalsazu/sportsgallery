@@ -83,15 +83,6 @@ const DetailsProduct = ({ data }) => {
         }
 
 
-
-
-
-
-
-
-
-
-
     }
 
 

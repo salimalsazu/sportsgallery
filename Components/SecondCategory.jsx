@@ -6,7 +6,7 @@ import { RxDoubleArrowRight } from 'react-icons/rx';
 
 const SecondCategory = () => {
     return (
-        <div className='my-40 grid grid-cols-1 lg:grid-cols-3 gap-5 mx-10' >
+        <div className='my-36 grid grid-cols-1 lg:grid-cols-3 gap-5 mx-10' >
             <div className='group relative block overflow-hidden transition ease-in-out delay-150   bg-lime-100 p-10 h-72' >
                 <Image src={image1}
                     alt="image"
