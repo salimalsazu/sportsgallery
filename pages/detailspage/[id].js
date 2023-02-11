@@ -1,6 +1,7 @@
 import DetailsProduct from '@/Components/DetailsProduct';
 import RelatedProducts from '@/Components/RelatedProducts';
 import Review from '@/Components/Review';
+import SingleTrandingProducts from '@/Components/SingleTrandingProducts';
 import React, { useEffect, useState } from 'react';
 
 const DetailsPage = ({ data }) => {
@@ -30,9 +31,10 @@ const DetailsPage = ({ data }) => {
                     <h1 className='uppercase font-extrabold text-lg mb-2' >Related Products</h1>
                     <hr className='border-gray-900 border-b-0' />
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center items-center my-10' >
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 justify-center items-center my-10' >
+
                     {
-                        dataRelated?.slice(0, 4).map(d => <RelatedProducts d={d} key={d._id} ></RelatedProducts>)
+                        dataRelated?.slice(0, 5).map((p, i) => <SingleTrandingProducts p={p} key={i} ></SingleTrandingProducts>)
                     }
 
                 </div>

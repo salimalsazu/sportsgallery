@@ -205,14 +205,16 @@ const DetailsProduct = ({ data }) => {
                         </span>
                         <p className='text-xs' >ADD TO WISHLIST</p>
                     </div>
-                    <div>
+                    <div >
                         {
-                            count === 10 && <h1 className='text-red-600 font-extrabold' > For bulk order, contact with us !!!</h1>
+                            count === 10 ? <h1 className='text-red-600 font-extrabold' > For bulk order, contact with us !!!</h1> :
+
+                                <h1 className='text-[#777]' >Shipping Charge Starts From $10.00</h1>
                         }
                     </div>
                     <div className='my-2' >
                         {
-                            count >= 2 && <h1>SubTotal: ${subTotal}.00</h1>
+                            count >= 1 && <h1>SubTotal: ${subTotal}.00</h1>
                         }
                     </div>
                     <div className='flex items-center mt-5' >
@@ -255,7 +257,7 @@ const DetailsProduct = ({ data }) => {
                         <div className='z-50'>
                             {isOpen && (
                                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-                                    <div className="w-full max-w-md bg-lime-300 rounded p-8">
+                                    <div className="w-full max-w-md bg-gray-200 rounded p-8">
                                         <form onSubmit={handleSubmit(onSubmit)} action="" className='flex'>
                                             <input
 
@@ -267,9 +269,9 @@ const DetailsProduct = ({ data }) => {
 
                                             <div>
                                                 {
-                                                    hide ? <button type='submit' className=' hidden  px-6 py-2 bg-black text-white' >Request</button> :
+                                                    hide ? <button type='submit' className=' hidden  px-6 py-2 bg-blue-500 text-white' >Request</button> :
 
-                                                        <button onClick={() => { setHide(hide) }} type='submit' className='px-6 py-2 bg-black text-white' >Request</button>
+                                                        <button onClick={() => { setHide(hide) }} type='submit' className='px-6 py-2 bg-blue-500 text-white' >Request</button>
                                                 }
                                             </div>
                                         </form>
@@ -296,6 +298,7 @@ const DetailsProduct = ({ data }) => {
                 </div>
 
             </div>
+
         </div>
 
     )

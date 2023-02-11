@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
+import { RiArrowDropDownLine } from 'react-icons/ri';
 import { BsCart4, BsSearch } from 'react-icons/bs';
-
-
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 const Navbar = () => {
+    const { data: session } = useSession();
 
+    console.log(session)
 
     return (
 
@@ -46,10 +48,10 @@ const Navbar = () => {
                             <Link href="/" >
                                 Home
                             </Link>
-                            <Link href="/dashboard" >
+                            <Link href="/collection" >
                                 Collection
                             </Link>
-                            <Link href="/dashboard" >
+                            <Link href="/category" >
                                 Category
                             </Link>
                             <Link href="/dashboard" >
@@ -73,7 +75,21 @@ const Navbar = () => {
                             </div>
                         </li>
                         <li className='text-3xl' >
-                            <button><AiOutlineUser></AiOutlineUser></button>
+                            {/* <Link href="/login" ><button><AiOutlineUser></AiOutlineUser></button></Link> */}
+                            <div className="dropdown dropdown-hover">
+                                <label className='flex items-center' tabIndex={3}><AiOutlineUser></AiOutlineUser> <span><RiArrowDropDownLine className='text-2xl'></RiArrowDropDownLine></span></label>
+                                <ul tabIndex={3} className="dropdown-content menu p-2 w-40 mt-24 bg-white text-black text-xs">
+                                    <li><Link href="/login" >Log in</Link></li>
+                                    {
+                                        session && <>
+                                            <li><Link href="/login" >{session.user.name}</Link></li>
+                                            <li><button onClick={() => signOut()} >Sign out</button></li>
+                                        </>
+                                    }
+
+                                </ul>
+                            </div>
+
                         </li>
                         <li className='text-3xl' >
                             <button><AiOutlineHeart></AiOutlineHeart></button>
@@ -89,7 +105,9 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </li>
+                        <div>
 
+                        </div>
 
                     </ul>
                 </div>
