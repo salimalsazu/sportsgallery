@@ -7,7 +7,25 @@ import { MdOutlineFavoriteBorder, MdStarRate, MdAutoFixHigh } from 'react-icons/
 import { TbJewishStar } from 'react-icons/tb';
 import Link from 'next/link'
 
+import { useEffect, useState } from 'react';
+import { getSession, signIn } from 'next-auth/react';
+
+
 const Dashboard = () => {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const securePage = async () => {
+            const session = await getSession()
+            if (!session) {
+                signIn()
+            } else {
+                setLoading(false)
+            }
+        }
+        securePage();
+    }, [])
 
 
     return (

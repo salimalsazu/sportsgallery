@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { BsCart4, BsSearch } from 'react-icons/bs';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 const Navbar = () => {
     const { data: session } = useSession();
@@ -54,9 +54,11 @@ const Navbar = () => {
                             <Link href="/category" >
                                 Category
                             </Link>
-                            <Link href="/dashboard" >
-                                Dashboard
-                            </Link>
+                            {
+                                session && <Link href="/dashboard" >
+                                    Dashboard
+                                </Link>
+                            }
 
                         </li>
 
@@ -79,7 +81,9 @@ const Navbar = () => {
                             <div className="dropdown dropdown-hover">
                                 <label className='flex items-center' tabIndex={3}><AiOutlineUser></AiOutlineUser> <span><RiArrowDropDownLine className='text-2xl'></RiArrowDropDownLine></span></label>
                                 <ul tabIndex={3} className="dropdown-content menu p-2 w-40 mt-24 bg-white text-black text-xs">
-                                    <li><Link href="/login" >Log in</Link></li>
+                                    {
+                                        !session && <li><Link href="/login" >Log in</Link></li>
+                                    }
                                     {
                                         session && <>
                                             <li><Link href="/login" >{session.user.name}</Link></li>
