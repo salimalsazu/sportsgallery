@@ -9,6 +9,7 @@ import HeroOne from "@/Components/HeroOne";
 import BigSale from "@/Components/BigSale";
 import Featured from "@/Components/Featured";
 import Discount from "@/Components/Discount";
+import Scroll from "@/Components/Scroll";
 
 
 export default function Home({ data }) {
@@ -31,6 +32,7 @@ export default function Home({ data }) {
       <Categories />
       <BigSale></BigSale>
       <TrandingProducts data={data} ></TrandingProducts>
+      <Scroll></Scroll>
       <SecondCategory></SecondCategory>
       <Discount></Discount>
       <Featured data={data} ></Featured>
