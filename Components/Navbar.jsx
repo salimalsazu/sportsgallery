@@ -3,8 +3,44 @@ import { AiOutlineUser, AiOutlineHeart } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { BsCart4, BsSearch } from 'react-icons/bs';
 import { useSession, signOut } from 'next-auth/react';
+import { useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image'
+import { removeFromCart } from '@/Redux/Feature/cart/cartSlice';
+
 
 const Navbar = () => {
+
+    const cart = useSelector((state) => state.cart.cart)
+    const dispatch = useDispatch()
+
+    let shopingCart
+
+    if (cart?.length) {
+        shopingCart = cart?.map((product, index) => <div className='flex p-2 items-center gap-2 w-full'>
+            <div>
+                <p>{index + 1}</p>
+            </div>
+            <div>
+                <Image
+                    src={product.img}
+                    width="70"
+                    height="70"
+                    alt="product image"
+                />
+            </div>
+            <div className='flex flex-col' >
+                <h1 className='text-black font-extrabold text-sm' >{product.name}</h1>
+                <p className='text-sm' >${product.subTotal}.00</p>
+                <p className='text-sm' > Quantity:{product.item}</p>
+            </div>
+            <div>
+                <button onClick={() => dispatch(removeFromCart(product))} className="text-xs" >X</button>
+            </div>
+        </div>)
+    } else {
+        shopingCart = <p className='font-extralight text-center text-xs p-10'>You have no items in your shopping cart.</p>
+    }
+
     const { data: session } = useSession();
 
     console.log(session)
@@ -99,11 +135,15 @@ const Navbar = () => {
                             <button><AiOutlineHeart></AiOutlineHeart></button>
                         </li>
                         <li className='text-3xl'>
-                            <div className="dropdown dropdown-hover flex justify-center items-center">
-                                <label className='flex justify-center items-center' tabIndex={1}><span><BsCart4></BsCart4></span> <span className='bg-red-500 text-white rounded-full py-1 px-2 text-xs -mt-5' >0</span>  </label>
-                                <div tabIndex={1} className="dropdown-content  bg-gray-100 mt-32 mr-20  w-60 rounded-lg shadow-lg text-[#777]">
-                                    <div className='flex justify-center items-center p-5 '>
-                                        <p className='font-extralight text-center text-xs'>You have no items in your shopping cart.</p>
+                            <div className="dropdown dropdown-hover flex justify-center items-center relative ">
+                                {
+                                    cart.length === 0 ? <label className='flex justify-center items-center' tabIndex={1}><span><BsCart4></BsCart4></span> <span className='bg-red-500 text-white rounded-full py-1 px-2 text-xs -mt-5' >0</span>  </label> :
+
+                                        <label className='flex justify-center items-center' tabIndex={1}><span><BsCart4></BsCart4></span> <span className='bg-red-500 text-white rounded-full py-1 px-2 text-xs -mt-5' >{cart.length}</span>  </label>
+                                }
+                                <div tabIndex={1} className="dropdown-content absolute top-0 bg-gray-100 mt-12 mr-20  w-60 rounded-lg shadow-lg text-[#777]">
+                                    <div className="flex flex-col justify-center items-center ">
+                                        {shopingCart}
                                     </div>
 
                                 </div>

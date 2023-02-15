@@ -24,7 +24,7 @@ const orders = ({ data }) => {
                 </div>
             </form>
             <div className="overflow-x-auto mx-5 mt-10 ">
-                <table className="table w-full  ">
+                <table className="table w-full">
 
                     <thead>
                         <tr >

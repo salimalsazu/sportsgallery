@@ -8,8 +8,21 @@ import Swal from 'sweetalert2'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/Redux/Feature/cart/cartSlice';
 
 const DetailsProduct = ({ data }) => {
+
+    //Redux Start 
+
+    const dispatch = useDispatch();
+
+
+    // Redux End  
+
+
+
+
     const { register, handleSubmit } = useForm();
     const router = useRouter();
     const [count, setCount] = useState(1)
@@ -31,99 +44,106 @@ const DetailsProduct = ({ data }) => {
 
     const quantity = details.quantity - count;
 
-    const addToCart = (id) => {
-
-        const cartProduct = {
-            subTotal,
-            item,
-            ...details
-        }
-        console.log(cartProduct);
-
-        try {
-
-            const res = axios('http://localhost:3000/api/cart', {
-                method: "POST",
-                headers: {
-                    "content-Type": "application/json"
-                },
-                data: JSON.stringify(cartProduct)
-            })
-
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Successfully Added',
-                showConfirmButton: false,
-                timer: 500
-            })
-            router.push('/cart')
-
-        } catch (error) {
-            console.log(error);
-        }
-
-        const updateData = {
-            quantity
-        }
-
-
-        try {
-
-            const res = axios(`http://localhost:3000/api/watch/${id}`, {
-                method: "PUT",
-                headers: {
-                    "content-Type": "application/json"
-                },
-                data: JSON.stringify(updateData)
-            })
-
-        } catch (error) {
-            console.log(error);
-        }
-
-
+    const toCart = {
+        ...details,
+        item,
+        subTotal
     }
 
 
+    // const addToCart = (id) => {
 
-    const onSubmit = (data) => {
+    //     const cartProduct = {
+    //         subTotal,
+    //         item,
+    //         ...details
+    //     }
+    //     console.log(cartProduct);
 
-        const stock = {
-            name: details.name,
-            price: details.price,
-            productIdd: details._id,
-            sku: details.sku,
-            category: details.category,
-            color: details.color,
-            img: details.img,
-            mobile: data.mobile
-        }
+    //     try {
 
-        console.log(stock)
+    //         const res = axios('http://localhost:3000/api/cart', {
+    //             method: "POST",
+    //             headers: {
+    //                 "content-Type": "application/json"
+    //             },
+    //             data: JSON.stringify(cartProduct)
+    //         })
 
-        try {
-            setHide(false);
-            const res = axios('http://localhost:3000/api/stocks', {
-                method: "POST",
-                headers: {
-                    "content-Type": "application/json"
-                },
-                data: JSON.stringify(stock)
-            })
-            Swal.fire({
-                position: 'top',
-                icon: 'success',
-                title: 'Thanks for Requesting',
-                showConfirmButton: false,
-                timer: 2000
-            })
-            setHide(true);
+    //         Swal.fire({
+    //             position: 'center',
+    //             icon: 'success',
+    //             title: 'Successfully Added',
+    //             showConfirmButton: false,
+    //             timer: 500
+    //         })
+    //         router.push('/cart')
 
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+
+    //     const updateData = {
+    //         quantity
+    //     }
+
+
+    //     try {
+
+    //         const res = axios(`http://localhost:3000/api/watch/${id}`, {
+    //             method: "PUT",
+    //             headers: {
+    //                 "content-Type": "application/json"
+    //             },
+    //             data: JSON.stringify(updateData)
+    //         })
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+
+
+    // }
+
+
+
+    // const onSubmit = (data) => {
+
+    //     const stock = {
+    //         name: details.name,
+    //         price: details.price,
+    //         productIdd: details._id,
+    //         sku: details.sku,
+    //         category: details.category,
+    //         color: details.color,
+    //         img: details.img,
+    //         mobile: data.mobile
+    //     }
+
+    //     console.log(stock)
+
+    //     try {
+    //         setHide(false);
+    //         const res = axios('http://localhost:3000/api/stocks', {
+    //             method: "POST",
+    //             headers: {
+    //                 "content-Type": "application/json"
+    //             },
+    //             data: JSON.stringify(stock)
+    //         })
+    //         Swal.fire({
+    //             position: 'top',
+    //             icon: 'success',
+    //             title: 'Thanks for Requesting',
+    //             showConfirmButton: false,
+    //             timer: 2000
+    //         })
+    //         setHide(true);
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
 
     return (
@@ -250,7 +270,7 @@ const DetailsProduct = ({ data }) => {
                             !disabled ? <button disabled className='bg-gray-300 px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button> :
 
                                 <Link href="#">
-                                    <button onClick={() => addToCart(details._id)} className='bg-black px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button>
+                                    <button onClick={() => dispatch(addToCart(toCart))} className='bg-black px-6 py-2 text-white flex items-center' > <BsCart4 className='mr-2' ></BsCart4> Add to Cart</button>
                                 </Link>
                         }
 
