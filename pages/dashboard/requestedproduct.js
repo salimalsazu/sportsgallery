@@ -40,8 +40,8 @@ const requestedproduct = ({ data }) => {
 };
 
 
-export async function getStaticProps() {
-    const res = await fetch(`${NEXT_URL}/api/stocks`)
+export async function getServerSideProps() {
+    const res = await fetch('/api/stocks')
     // console.log(res.data.watches)
     const data = await res.json()
     // const { watches } = res.data
@@ -50,9 +50,6 @@ export async function getStaticProps() {
         props: { data }
     }
 }
-
-
-
 
 
 export default requestedproduct;

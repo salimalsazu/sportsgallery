@@ -2,7 +2,7 @@ import { toggleCategory } from '@/Redux/Feature/filter/filterslice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SingleTrandingProducts from '@/Components/SingleTrandingProducts';
-import { NEXT_URL } from '@/Config';
+
 
 
 
@@ -11,7 +11,7 @@ const allProducts = () => {
     const [allProducts, setAllProducts] = useState([])
 
     useEffect(() => {
-        fetch(`${NEXT_URL}/api/watch`)
+        fetch('/api/watch')
             .then(res => res.json())
             .then(data => setAllProducts(data))
     }, [])

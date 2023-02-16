@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import React, { useState } from 'react';
 import axios from "axios";
 import Swal from 'sweetalert2'
-import { NEXT_URL } from "@/Config";
+
 
 const addproduct = () => {
 
@@ -54,7 +54,7 @@ const addproduct = () => {
 
                 try {
                     setHide(false)
-                    const res = axios(`${NEXT_URL}/api/watch`, {
+                    const res = axios('/api/watch', {
                         method: "POST",
                         headers: {
                             "content-Type": "application/json"

@@ -6,7 +6,7 @@ import { BsFillBagFill } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { NEXT_URL } from '@/Config';
+
 
 const cart = ({ data }) => {
 
@@ -22,7 +22,7 @@ const cart = ({ data }) => {
     const [carts, setCarts] = useState([])
 
     useEffect(() => {
-        fetch(`${NEXT_URL}/api/cart`)
+        fetch('/api/cart')
             .then(res => res.json())
             .then(data => setCarts(data))
 
@@ -47,7 +47,7 @@ const cart = ({ data }) => {
 
     const handleDelete = async (id) => {
         try {
-            const deleteData = await fetch(`${NEXT_URL}/api/cart/${id}`, {
+            const deleteData = await fetch('/api/cart/${id}', {
                 method: "DELETE"
             })
 
@@ -68,7 +68,7 @@ const cart = ({ data }) => {
 
         // console.log(handleQuantity);
         // try {
-        //     const res = axios(`${NEXT_URL}/api/watch/${id}`, {
+        //     const res = axios('/api/watch/${id}, {
         //         method: "PUT",
         //         headers: {
         //             "content-Type": "application/json"

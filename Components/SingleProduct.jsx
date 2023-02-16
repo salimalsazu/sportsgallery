@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import { NEXT_URL } from '@/Config';
+
 
 
 const SingleProduct = ({ n }) => {
@@ -37,7 +37,7 @@ const SingleProduct = ({ n }) => {
 
         try {
             setHide(false);
-            const res = axios(`${NEXT_URL}/api/orders`, {
+            const res = axios('/api/orders', {
                 method: "POST",
                 headers: {
                     "content-Type": "application/json"

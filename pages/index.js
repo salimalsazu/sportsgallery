@@ -9,7 +9,7 @@ import BigSale from "@/Components/BigSale";
 import Featured from "@/Components/Featured";
 import Discount from "@/Components/Discount";
 import Scroll from "@/Components/Scroll";
-import { NEXT_URL } from "@/Config/index";
+
 
 export default function Home({ data }) {
 
@@ -41,7 +41,7 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${NEXT_URL}/api/watch`)
+  const res = await fetch('/api/watch')
   // console.log(res.data.watches)
   const data = await res.json()
   // const { watches } = res.data

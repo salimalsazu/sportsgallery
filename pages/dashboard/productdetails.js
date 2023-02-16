@@ -51,8 +51,8 @@ const productdetails = ({ data }) => {
 };
 
 
-export async function getStaticProps() {
-    const res = await fetch(`${NEXT_URL}/api/watch`)
+export async function getServerSideProps() {
+    const res = await fetch('/api/watch')
     // console.log(res.data.watches)
     const data = await res.json()
     // const { watches } = res.data

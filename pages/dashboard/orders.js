@@ -1,4 +1,3 @@
-import { NEXT_URL } from '@/Config';
 import React from 'react';
 
 const orders = ({ data }) => {
@@ -70,7 +69,7 @@ const orders = ({ data }) => {
 
 
 export async function getServerSideProps() {
-    const res = await fetch(`${NEXT_URL}/api/orders`)
+    const res = await fetch('/api/orders')
     // console.log(res.data.watches)
     const data = await res.json()
     // const { watches } = res.data
