@@ -2,6 +2,7 @@ import DetailsProduct from '@/Components/DetailsProduct';
 import RelatedProducts from '@/Components/RelatedProducts';
 import Review from '@/Components/Review';
 import SingleTrandingProducts from '@/Components/SingleTrandingProducts';
+import { NEXT_URL } from '@/Config';
 import React, { useEffect, useState } from 'react';
 
 const DetailsPage = ({ data }) => {
@@ -11,7 +12,7 @@ const DetailsPage = ({ data }) => {
     const [related, setRelated] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/watch')
+        fetch(`${NEXT_URL}/api/watch`)
             .then(res => res.json())
             .then(data => setRelated(data))
     }, [])
@@ -46,7 +47,7 @@ const DetailsPage = ({ data }) => {
 
 export async function getServerSideProps({ params }) {
     const id = params.id
-    const res = await fetch(`http://localhost:3000/api/watch/${id}`)
+    const res = await fetch(`${NEXT_URL}/api/watch/${id}`)
     // console.log(res.data.watches)
     const data = await res.json()
     // const {watches} = res.data

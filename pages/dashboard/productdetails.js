@@ -3,7 +3,7 @@ import SingleProductDetails from './SingleProductDetails';
 
 const productdetails = ({ data }) => {
 
-    const productDetail = data.watches;
+    const productDetail = data?.watches;
 
     return (
         <div className='mx-auto mt-10'>
@@ -41,7 +41,7 @@ const productdetails = ({ data }) => {
                         </tr>
                     </thead>
                     {
-                        productDetail.map((p, index) => <SingleProductDetails p={p} index={index} key={p._id} ></SingleProductDetails>)
+                        productDetail?.map((p, index) => <SingleProductDetails p={p} index={index} key={p._id} ></SingleProductDetails>)
                     }
                 </table>
             </div>
@@ -52,7 +52,7 @@ const productdetails = ({ data }) => {
 
 
 export async function getStaticProps() {
-    const res = await fetch('http://localhost:3000/api/watch')
+    const res = await fetch(`${NEXT_URL}/api/watch`)
     // console.log(res.data.watches)
     const data = await res.json()
     // const { watches } = res.data

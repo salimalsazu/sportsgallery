@@ -1,6 +1,6 @@
 import SingleProduct from './SingleProduct';
 import { motion } from "framer-motion";
-
+import Link from 'next/link'
 
 
 const WhatsNew = ({ data }) => {
@@ -16,12 +16,14 @@ const WhatsNew = ({ data }) => {
                     <h1 className='text-3xl font-extrabold' >Our Latest Product</h1>
                     <hr className='border-yellow-500 border-b-2 w-20 mt-5' />
 
-                    <motion.div
-                        className="box"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    <Link href="/allProducts" >
+                        <motion.div
+                            className="box"
+                            whileHover={{ scale: 1.1 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
 
-                    ><button className='bg-blue-500 px-12 py-2 text-white mt-5' >Shop Now</button></motion.div>
+                        ><button className='bg-blue-500 px-12 py-2 text-white mt-5' >Shop Now</button></motion.div>
+                    </Link>
                 </div>
             </div>
 

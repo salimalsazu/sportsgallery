@@ -1,7 +1,6 @@
 import Categories from "@/Components/Categories";
 import Option from "@/Components/Option";
 import SecondCategory from "@/Components/SecondCategory";
-import SubHero from "@/Components/SubHero";
 import TrandingProducts from "@/Components/TrandingProducts";
 import WhatsNew from "@/Components/WhatsNew";
 import { motion, useScroll } from "framer-motion";
@@ -10,7 +9,7 @@ import BigSale from "@/Components/BigSale";
 import Featured from "@/Components/Featured";
 import Discount from "@/Components/Discount";
 import Scroll from "@/Components/Scroll";
-
+import { NEXT_URL } from "@/Config/index";
 
 export default function Home({ data }) {
 
@@ -36,13 +35,13 @@ export default function Home({ data }) {
       <SecondCategory></SecondCategory>
       <Discount></Discount>
       <Featured data={data} ></Featured>
-      {/* <SubHero></SubHero> */}
+
     </div>
   )
 }
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/watch')
+  const res = await fetch(`${NEXT_URL}/api/watch`)
   // console.log(res.data.watches)
   const data = await res.json()
   // const { watches } = res.data

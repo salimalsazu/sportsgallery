@@ -2,7 +2,7 @@ import React from 'react';
 
 const requestedproduct = ({ data }) => {
 
-    const stock = data.stock;
+    const stock = data?.stock;
     return (
         <div className="overflow-x-auto mt-10 mx-10">
             <h1 className='uppercase font-extrabold text-center my-10' >Requested Products</h1>
@@ -25,11 +25,11 @@ const requestedproduct = ({ data }) => {
                         stock?.map((s, index) =>
                             <tr>
                                 <th>{index + 1}</th>
-                                <td>{s.name}</td>
-                                <td>{s._id}</td>
-                                <td>{s.sku}</td>
-                                <td>{s.price}</td>
-                                <td>{s.mobile}</td>
+                                <td>{s?.name}</td>
+                                <td>{s?._id}</td>
+                                <td>{s?.sku}</td>
+                                <td>{s?.price}</td>
+                                <td>{s?.mobile}</td>
                                 <td><button className='bg-black text-white rounded-full px-4' >Pending</button></td>
                             </tr>)
                     }
@@ -41,7 +41,7 @@ const requestedproduct = ({ data }) => {
 
 
 export async function getStaticProps() {
-    const res = await fetch('http://localhost:3000/api/stocks')
+    const res = await fetch(`${NEXT_URL}/api/stocks`)
     // console.log(res.data.watches)
     const data = await res.json()
     // const { watches } = res.data

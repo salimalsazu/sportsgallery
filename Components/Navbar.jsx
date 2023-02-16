@@ -84,11 +84,11 @@ const Navbar = () => {
                             <Link href="/" >
                                 Home
                             </Link>
-                            <Link href="/collection" >
+                            <Link href="/allProducts" >
                                 Collection
                             </Link>
                             <Link href="/category" >
-                                Category
+                                About Us
                             </Link>
                             {
                                 session && <Link href="/dashboard" >

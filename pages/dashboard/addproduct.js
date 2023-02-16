@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import React, { useState } from 'react';
 import axios from "axios";
 import Swal from 'sweetalert2'
+import { NEXT_URL } from "@/Config";
 
 const addproduct = () => {
 
@@ -53,7 +54,7 @@ const addproduct = () => {
 
                 try {
                     setHide(false)
-                    const res = axios('http://localhost:3000/api/watch', {
+                    const res = axios(`${NEXT_URL}/api/watch`, {
                         method: "POST",
                         headers: {
                             "content-Type": "application/json"
@@ -105,7 +106,7 @@ const addproduct = () => {
                     >
                         <option value="">Select category</option>
                         <option value="Watch">Sports Watch</option>
-                        <option value="Fashion">Jersey</option>
+                        <option value="Fashion">Fashion</option>
                         <option value="Sports Item">Sports Item</option>
                     </select>
                     <select

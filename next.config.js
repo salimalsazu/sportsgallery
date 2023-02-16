@@ -15,6 +15,8 @@ const nextConfig = {
 
   env: {
     MONGO_URI: "mongodb+srv://sportsgallery:Wz52G4811fxD2Ly9@portfolio.zka99gz.mongodb.net/?retryWrites=true&w=majority"
+
+    
   }
 
 }
